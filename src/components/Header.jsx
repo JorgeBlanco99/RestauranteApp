@@ -4,7 +4,16 @@ import { MdOutlineShoppingBasket } from "react-icons/md";
 import { BiUserCircle } from "react-icons/bi";
 import { motion } from 'framer-motion';
 import {Link} from "react-router-dom";
+
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { app } from '../firebase.config';
 const Header = () => {
+  const firebaseAuth = getAuth(app);
+  const provider = new GoogleAuthProvider();
+  const login = async () => {
+    const response = await signInWithPopup(firebaseAuth,provider);
+    console.log(response);
+  };
   return (
     <header className="fixed z-50 w-screen p-6 px-16">
         {/*desktop tablet*/}
@@ -28,7 +37,9 @@ const Header = () => {
                 <p className="text-sm text-white font-semibold">2</p>
               </div>
             </div>
-            <BiUserCircle className="text-textColor text-3xl cursor-pointer"/>
+            <div className="relative">
+              <BiUserCircle className="text-textColor text-3xl cursor-pointer"  onClick={login}/>
+            </div>
           </div>
         </div>
         {/*Mobile*/}
