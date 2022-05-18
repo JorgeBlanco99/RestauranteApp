@@ -7,7 +7,7 @@ const App = () => {
   <AnimatePresence exitBeforeEnter>
     <div className="w-screen h-auto flex flex-col bg-primary">
       <Header/>
-      <main className='mt-16 md:mt-20 px-16 py-4 p-8 w-full'> 
+      <main className='mt-14 px-4 smd:mt-20 md:px-16 md:py-4  w-full'> 
         <Routes>
           <Route path="/*" element={<MainContainer/>} />
           <Route path="/createItem" element={<CreateContainer/>} />

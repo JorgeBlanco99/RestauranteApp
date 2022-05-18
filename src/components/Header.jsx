@@ -73,7 +73,7 @@ const Header = () => {
                     user && user.email === "ikoke67@gmail.com" && ( 
                       <Link to={"/createItem"}> 
                       <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 
-                      transition-all duration-75 ease-out text-textColor'> Nuevo Producto <MdAdd/></p>
+                      transition-all duration-75 ease-out text-textColor' onClick={()=>setIsMenu(false)}> Nuevo Producto <MdAdd/></p>
                       </Link>
                     )
                   } 
@@ -114,15 +114,15 @@ const Header = () => {
                  user && user.email === "ikoke67@gmail.com" && ( 
                   <Link to={"/createItem"}> 
                   <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 
-                  transition-all duration-75 ease-out text-textColor'> Nuevo Producto <MdAdd/></p>
+                  transition-all duration-75 ease-out text-textColor' onClick ={()=>setIsMenu(false)}> Nuevo Producto  <MdAdd/></p>
                   </Link>
                 )} 
                 <ul className="flex flex-col">
-                <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-200 gap-3 px-4 py-2">
+                <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-200 gap-3 px-4 py-2"  onClick ={()=>setIsMenu(false)}>
                   Inicio</li>
-                <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-200 gap-3 px-4 py-2">
+                <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-200 gap-3 px-4 py-2"  onClick ={()=>setIsMenu(false)}>
                   Menu</li>
-                <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-200 gap-3 px-4 py-2">
+                <li className="text-base text-textColor hover:text-headingColor duration-100 transition-all ease-in-out cursor-pointer hover:bg-slate-200 gap-3 px-4 py-2"  onClick ={()=>setIsMenu(false)}>
                   Sobre Nosotros</li>
               </ul>
                 <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 
