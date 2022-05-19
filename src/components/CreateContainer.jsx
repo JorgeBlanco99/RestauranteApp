@@ -125,13 +125,13 @@ const clearData= () => {
   setPrice("");
   setCategory("Selecione la categoria");
 }
-const fetchData = async () =>{
-  await getAllFoodItems().then (data => {
+const fetchData = async () => {
+  await getAllFoodItems().then((data) => {
     dispatch({
       type: actionType.SET_FOOD_ITEMS,
-      foodItems : data
-    })
-  })
+      foodItems: data,
+    });
+  });
 };
  return (
     <div className='w-full min-h-screen flex items-center justify-center'>
