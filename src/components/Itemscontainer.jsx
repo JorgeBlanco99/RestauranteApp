@@ -1,10 +1,24 @@
-import React from 'react'
+import React, { useEffect, useInsertionEffect, useState } from 'react'
 import {BsFillBasket2Fill} from 'react-icons/bs'
 import {motion} from "framer-motion"
 import notFound from "./img/notFound.png";
+import { useStateValue} from '../context/StateProvider';
+import { actionType } from '../context/reducer';
 
 const Itemscontainer = ({ flag , data }) => {
-  return (
+    const[items,setItems] = useState([]);
+    const[{cartItems}, dispatch] = useStateValue();
+    const addToCard = () => {
+        dispatch({
+          type: actionType.SET_CARD_ITEMS,
+          cartItems: items,
+        });
+        localStorage.setItem("cartItems",JSON.stringify(cartItems));
+      }
+      useEffect(()=>{
+        addToCard()
+      }, [items])
+    return (
     <div className={`w-full flex items-center gap-3 my-12${flag ? 'overflow-x-scroll scrollbar-none scroll-smooth' : 'overflow-x-hidden flex-wrap justify-center '}`}>
        {data && data.length > 0? (
            data.map((item) =>(
@@ -13,7 +27,8 @@ const Itemscontainer = ({ flag , data }) => {
                 <motion.div whileHover={{scale: 1.1}}  className='w-20 h-30 -mt-8'> 
                     <img  src = {item?.imageURl} alt="Foto Producto" className='w-full h-full object-contain'/>
                 </motion.div>
-                 <motion.div whileTap={{scale: 0.6}} className='w-10 h-10 rounded-full bg-blue-400 flex items-center justify-center cursor-pointer hover:shadow-md'>
+                 <motion.div whileTap={{scale: 0.6}} className='w-10 h-10 rounded-full bg-blue-400 flex items-center justify-center cursor-pointer hover:shadow-md'
+                    onClick={() => setItems([...cartItems,item])}>
                      <BsFillBasket2Fill className='text-white' />
                  </motion.div>
             </div>
@@ -21,7 +36,7 @@ const Itemscontainer = ({ flag , data }) => {
                 <p className='text-textColor font-semibold  text-base md:text-lg'> {item?.title}</p>
                 <p className='text-textColor text-base'> {item?.description}</p>
                 <div className='flex items-center gap8'>
-                    <p className='text-lg text-black font-semibold'><span className='text-sm text-blue-400'>$</span> {item?.price}</p>
+                    <p className='text-lg text-black font-semibold'>{item?.price}<span className='text-sm text-blue-400'>€</span> </p>
                 </div>          
             </div>
         </div>
