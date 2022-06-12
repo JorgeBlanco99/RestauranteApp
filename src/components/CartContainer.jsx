@@ -27,6 +27,13 @@ const CartContainer = () => {
           cartShow:!cartShow,
         })
       }
+      const clearCart = () => {
+        dispatch({
+          type: actionType.SET_CARD_ITEMS,
+          cartItems: [],
+        });
+        localStorage.setItem("cartItems", JSON.stringify([]));
+      };
 
   return (
     <motion.div initial={{opacity:0, x:200}}
@@ -36,7 +43,7 @@ const CartContainer = () => {
         <div className='w-full flex items-center justify-between p-4'>
             <motion.div whileTap={{scale:0.75}}> <MdOutlineKeyboardBackspace className='text-3xl cursor-pointer'  onClick={showCart}/> </motion.div>
             <p className='text-lg font-semibold'>Cesta</p>
-            <motion.p whileTap={{scale:0.75}} className='flex items-center gap-2 p-1 px-2 my-2 bg-red-300 rounded-md hover:shadow-md cursor-pointer'> Vaciar <RiRefreshLine/></motion.p>
+            <motion.p whileTap={{scale:0.75}} className='flex items-center gap-2 p-1 px-2 my-2 bg-red-300 rounded-md hover:shadow-md cursor-pointer' onClick={clearCart}> Vaciar <RiRefreshLine/></motion.p>
         </div>
         {cartItems && cartItems.length > 0 ? (
         <div className='w-full h-full rounded-t-[2rem] flex flex-col bg-cardBg'>

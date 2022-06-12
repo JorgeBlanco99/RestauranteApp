@@ -15,35 +15,33 @@ const CardItem = ({item, setFlag, flag}) => {
             cartItems: items,
         })
     }
-    const updateQty = (a, id) =>{
-        if(a === "add"){
-            setQty(qty + 1)
-            cartItems.map((item) => {
-                if(item.id  === id){
-                    item.qty += 1;
-                    setFlag(flag + 1);
-                }
-            })
-            cartDispatch();
-        }
-        if(a === "del"){
-            if(qty === 1){
-                items = cartItems.filter((item)=> item.id !== id);
-                setFlag(flag - 1);
-                cartDispatch();
-            }else{
-                setQty(qty - 1)
-                cartItems.map(item=> {
-                if(item.id  === id){
-                    item.qty -= 1;
-                    setFlag(flag - 1);
-                }
-                })
-                cartDispatch();
+    const updateQty = (action, id) => {
+        if (action == "add") {
+          setQty(qty + 1);
+          cartItems.map((item) => {
+            if (item.id === id) {
+              item.qty += 1;
+              setFlag(flag + 1);
             }
-            
+          });
+          cartDispatch();
+        } else {
+          if (qty == 1) {
+            items = cartItems.filter((item) => item.id !== id);
+            setFlag(flag + 1);
+            cartDispatch();
+          } else {
+            setQty(qty - 1);
+            cartItems.map((item) => {
+              if (item.id === id) {
+                item.qty -= 1;
+                setFlag(flag + 1);
+              }
+            });
+            cartDispatch();
+          }
         }
-    }
+      };
     useEffect(()=>{
         setItems(cartItems)
     }, [qty])
