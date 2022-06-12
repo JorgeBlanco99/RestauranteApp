@@ -3,14 +3,13 @@ import Logo from './img/logo.jpg'
 import { MdOutlineShoppingBasket, MdAdd, MdLogout } from "react-icons/md";
 import {Link} from "react-router-dom";
 import { motion } from 'framer-motion';
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { getAuth, signInWithPopup, GoogleAuthProvider, signOut} from "firebase/auth";
 import { app } from '../firebase.config';
 import { useStateValue} from '../context/StateProvider';
 import { actionType } from '../context/reducer';
 const Header = () => {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
-
   const[{user , cartShow , cartItems}, dispatch] = useStateValue();
 
   const[isMenu, setIsMenu] = useState(false);
@@ -28,6 +27,7 @@ const Header = () => {
     }
   };
   const logout = () => {
+    const x = user.signOut;
     setIsMenu(false);
     localStorage.clear()
     dispatch({
@@ -47,7 +47,7 @@ const Header = () => {
         <div className="hidden md:flex w-full h-full items-center justify-between">
           <Link to = {"/"} className='flex items-center gap-2'>
             <img src={Logo} className="w-10 object-cover" alt="logo"/>
-            <p className="text-headingColor text-xl font-bold">Restautante</p>
+            <p className="text-headingColor text-xl font-bold">Restaurante</p>
           </Link>
           <div className="flex items-center gap-8">
             <ul className="flex items-center gap-8">
@@ -81,12 +81,22 @@ const Header = () => {
                    className="w-40 bg-white shadow-x1 rounded-lg flex flex-col absolute top-12 right-0">
                 {/*MODO ADMIN CUTRE HACER BIEN*/} 
                   {
-                    user && user.email === "ikoke67@gmail.com" && ( 
+                    user && user.rol === "admin" && ( 
+
                       <Link to={"/createItem"}> 
                       <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 
                       transition-all duration-75 ease-out text-textColor' onClick={()=>setIsMenu(false)}> Nuevo Producto <MdAdd/></p>
                       </Link>
                     )
+                    }{
+                    user && user.rol === "admin" && ( 
+
+                      <Link to={"/rolGestion"}> 
+                      <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 
+                      transition-all duration-75 ease-out text-textColor' onClick={()=>setIsMenu(false)}> Gestionar roles <MdAdd/></p>
+                      </Link>
+                    )
+
                   } 
                 <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 
                 transition-all duration-75 ease-out text-textColor'  onClick={logout}>Cerrar sesion <MdLogout/></p>
@@ -127,7 +137,7 @@ const Header = () => {
                   <div className="w-40 bg-white shadow-x1 rounded-lg flex flex-col absolute top-12 right-0">
                 {/*MODO ADMIN CUTRE HACER BIEN*/} 
                 {
-                 user && user.email === "ikoke67@gmail.com" && ( 
+                 user && user.rol === "admin" && ( 
                   <Link to={"/createItem"}> 
                   <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 
                   transition-all duration-75 ease-out text-textColor' onClick ={()=>setIsMenu(false)}> Nuevo Producto  <MdAdd/></p>

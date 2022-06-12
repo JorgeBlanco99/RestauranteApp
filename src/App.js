@@ -1,11 +1,51 @@
-import React, { useEffect } from 'react';
+import React, { useEffect,useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { MainContainer, Header, CreateContainer } from './components';
+import { MainContainer, Header, CreateContainer, RolGestion,Login} from './components';
 import {AnimatePresence} from "framer-motion";
 import { useStateValue } from './context/StateProvider';
 import { getAllFoodItems } from './utils/firebaseFuntions';
 import { actionType } from './context/reducer';
+import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getFirestore, doc, getDoc } from "firebase/firestore";
+import { app } from './firebase.config';
+
+const auth = getAuth(app);
+const firestore = getFirestore(app);
 const App = () => {
+  const [flag, setFlag] = useState(true);
+  const[{user}, dispatch1] = useStateValue();
+
+  async function getRol(uid) {
+    const docuRef = doc(firestore, `users/${uid}`);
+    const docuCifrada = await getDoc(docuRef);
+    const infoFinal = docuCifrada.data().rol;
+    return infoFinal;
+  }
+
+  function setUserWithFirebaseAndRol(usuarioFirebase) {
+    getRol(usuarioFirebase.uid).then((rol) => {
+      const userData = {
+        uid: usuarioFirebase.uid,
+        email: usuarioFirebase.email,
+        rol: rol,
+        flag: "false",
+      };
+      dispatch1({
+        type: actionType.SET_USER,
+        user: userData,
+      });
+      localStorage.setItem('user', JSON.stringify(userData));
+      setFlag(null);
+    });
+  }
+
+  onAuthStateChanged(auth, (usuarioFirebase) => {
+    if (usuarioFirebase) {
+      if (!user.flag) {
+        setUserWithFirebaseAndRol(usuarioFirebase);
+      }
+    }
+  });
   const [{foodItems}, dispatch] = useStateValue();
   const fetchData = async () =>{
     await getAllFoodItems().then (data => {
@@ -15,6 +55,7 @@ const App = () => {
       })
     })
   };
+
   useEffect(() => {fetchData()},[]);
   return (
   <AnimatePresence exitBeforeEnter>
@@ -24,6 +65,8 @@ const App = () => {
         <Routes>
           <Route path="/*" element={<MainContainer/>} />
           <Route path="/createItem" element={<CreateContainer/>} />
+          <Route path="/rolGestion" element={<RolGestion/>} />
+          <Route path="/login" element={<Login/>} />
         </Routes>
 
       </main>

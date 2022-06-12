@@ -25,3 +25,28 @@ export const categories = [
         urlParamName: "bebidas",
     },
 ];
+
+
+
+export const roles = [
+    {
+        id: 1,
+        name: "Administrador",
+        urlParamName: "admin",
+    },
+    {
+        id: 2,
+        name: "Cocina",
+        urlParamName: "kitchen",
+    },
+    {
+        id: 3,
+        name: "Cliente",
+        urlParamName: "client",
+    },
+    {
+        id: 4,
+        name: "Camarero",
+        urlParamName: "waiter",
+    },
+];
