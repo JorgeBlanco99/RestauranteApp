@@ -51,18 +51,18 @@ const Login = () => {
     }
   }
   return (
-    <div>
-    <h1>{isRegistering ? "Regístrate" : "Inicia sesión"}</h1>
+    <div class="relative flex flex-col justify-center min-h-screen overflow-hidden">
+    <h1 class="text-3xl font-semibold text-center text-green-600">{isRegistering ? "Regístrate" : "Inicia sesión"}</h1>
 
     <form onSubmit={submitHandler}>
-      <label>
+      <label class="block text-sm text-gray-800">
         Correo electrónico:
-        <input type="email" id="email" />
+        <input type="email" id="email" class="block w-full px-4 py-2 mt-2 text-green-700 bg-white border rounded-md focus:border-green-400 focus:ring-green-300 focus:outline-none focus:ring focus:ring-opacity-40"/>
       </label>
 
       <label>
         Contraseña:
-        <input type="password" id="password" />
+        <input type="password" id="password" class="block w-full px-4 py-2 mt-2 text-green-700 bg-white border rounded-md focus:border-green-400 focus:ring-green-300 focus:outline-none focus:ring focus:ring-opacity-40" />
       </label>
 
       <div className='w-full'>
