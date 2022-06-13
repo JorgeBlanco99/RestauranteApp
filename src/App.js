@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { MainContainer, Header, CreateContainer, RolGestion,Login} from './components';
+import { MainContainer, Header, CreateContainer,Login,KitchenView } from './components';
 import {AnimatePresence} from "framer-motion";
 import { useStateValue } from './context/StateProvider';
 import { getAllFoodItems } from './utils/firebaseFuntions';
@@ -65,8 +65,8 @@ const App = () => {
         <Routes>
           <Route path="/*" element={<MainContainer/>} />
           <Route path="/createItem" element={<CreateContainer/>} />
-          <Route path="/rolGestion" element={<RolGestion/>} />
           <Route path="/login" element={<Login/>} />
+          <Route path="/kitchen" element={<KitchenView/>} />
         </Routes>
 
       </main>

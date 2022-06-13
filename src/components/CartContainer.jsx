@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {MdOutlineKeyboardBackspace} from 'react-icons/md'
 import {RiRefreshLine} from 'react-icons/ri'
-
+import { saveOrder } from '../utils/firebaseFuntions';
 import { useStateValue} from '../context/StateProvider';
 import { actionType } from '../context/reducer';
 import CardItem from './CardItem';
@@ -12,6 +12,14 @@ const CartContainer = () => {
     const[{cartShow , cartItems }, dispatch] = useStateValue();
     const [flag, setFlag] = useState(1);
     const [tot, setTot] = useState(0);
+  const  order = () =>{
+    const data = {
+      id: `${Date.now()}`,
+      produc: Object.assign({},cartItems)
+    }
+    
+    saveOrder(data);
+  };
 
   useEffect(() => {
     let totalPrice = cartItems.reduce(function (accumulator, item) {
@@ -26,7 +34,7 @@ const CartContainer = () => {
           type: actionType.SET_CARD_SHOW,
           cartShow:!cartShow,
         })
-      }
+      };
       const clearCart = () => {
         dispatch({
           type: actionType.SET_CARD_ITEMS,
@@ -66,7 +74,7 @@ const CartContainer = () => {
                     <p className='text-white'> {tot} €</p>
                 </div>
                 <motion.button whileTap={{scale:0.75}}
-                type="button" className='w-full p-2 rounded-full bg-blue-600 text-white text-lg my-2 hover shadow-lg'>
+                type="button" className='w-full p-2 rounded-full bg-blue-600 text-white text-lg my-2 hover shadow-lg' onClick={order}>
                     Pedir
                 </motion.button>
             </div>          
@@ -74,7 +82,7 @@ const CartContainer = () => {
         ):(
             <div className='w-full h-full flex flex-col items-center justify-center gap-6'>
                 {/* añadir una imagen de carta vacia*/}
-                <p className='text-xl font-semibold'> Añade productos a la carta</p>
+                <p className='text-xl font-semibold'> Añade productos a la cesta</p>
             </div>
         )}
     </motion.div>

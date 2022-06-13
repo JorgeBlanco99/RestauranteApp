@@ -8,6 +8,7 @@ const CardItem = ({item, setFlag, flag}) => {
     const [qty, setQty] = useState(item.qty);
     const [items, setItems] = useState([])
     const[{cartItems}, dispatch] = useStateValue();
+    
     const cartDispatch = () => {
         localStorage.setItems("cartItems",JSON.stringify(items));
         dispatch({
@@ -44,7 +45,8 @@ const CardItem = ({item, setFlag, flag}) => {
       };
     useEffect(()=>{
         setItems(cartItems)
-    }, [qty])
+    }, [qty,items])
+
   return (
     <div className='w-full px-2 p-1 rounded-lg bg-cardItem flex items-center gap-2'>
     <img src= {item?.imageURl} className='w.20 h-20 max-w-[60px] rounded-full object-contain' alt="Foto producto selecionado" />
