@@ -10,4 +10,5 @@ export const initialState = {
     cartItems: cartInfo,
     kitchenOrders: null,
     modifyItem: null,
+    RestaurantInfo: null,
 };

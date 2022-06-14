@@ -50,3 +50,16 @@ export const roles = [
         urlParamName: "waiter",
     },
 ];
+
+export const gestion = [
+    {
+        id: 1,
+        name: "Reservas",
+        urlParamName: "reservation",
+    },
+    {
+        id: 2,
+        name: "Datos",
+        urlParamName: "restaurant",
+    },
+];

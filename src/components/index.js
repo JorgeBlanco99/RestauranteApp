@@ -12,4 +12,12 @@ export {default as KitchenView} from './KitchenView'
 export {default as ProductManage} from './ProductManage'
 export {default as ModifyItemsContainer} from './ModifyItemsContainer'
 export {default as ModifyContainer} from './ModifyContainer'
+export {default as ReservationView} from './ReservationView'
+export {default as ReservationContainer} from './ReservationContainer'
+export {default as ManagerView} from './ManagerView'
+export {default as RestaurantInformation} from './RestaurantInformation'
+
+
+
+
 
