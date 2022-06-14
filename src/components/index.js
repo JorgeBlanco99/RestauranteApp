@@ -9,3 +9,7 @@ export {default as CartContainer} from './CartContainer'
 export {default as CardItem} from './CardItem'
 export {default as Login} from './Login'
 export {default as KitchenView} from './KitchenView'
+export {default as ProductManage} from './ProductManage'
+export {default as ModifyItemsContainer} from './ModifyItemsContainer'
+export {default as ModifyContainer} from './ModifyContainer'
+

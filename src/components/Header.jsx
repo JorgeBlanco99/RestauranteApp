@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import Logo from './img/logo.jpg'
 import { MdOutlineShoppingBasket, MdAdd, MdLogout } from "react-icons/md";
+import { GiChefToque } from "react-icons/gi";
 import {Link} from "react-router-dom";
 import { motion } from 'framer-motion';
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut} from "firebase/auth";
@@ -94,6 +95,16 @@ const Header = () => {
                       <Link to={"/rolGestion"}> 
                       <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 
                       transition-all duration-75 ease-out text-textColor' onClick={()=>setIsMenu(false)}> Gestionar roles <MdAdd/></p>
+                      </Link>
+                    )
+
+                  } 
+                  {
+                    user && user.rol === "kitchen" && ( 
+
+                      <Link to={"/kitchen"}> 
+                      <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 
+                      transition-all duration-75 ease-out text-textColor' onClick={()=>setIsMenu(false)}> Cocina <GiChefToque/></p>
                       </Link>
                     )
 

@@ -4,6 +4,7 @@ export const actionType = {
     SET_CARD_SHOW: 'SET_CARD_SHOW',
     SET_CARD_ITEMS: 'SET_CARD_ITEMS',
     SET_KITCHEN_ORDERS: 'SET_KITCHEN_ORDERS',
+    SET_MODIFY_ITEM : 'SET_MODIFY_ITEM',
 };
 
 const reducer = (state, action) => {
@@ -14,7 +15,14 @@ const reducer = (state, action) => {
                 ...state,
                 user: action.user,
             }
-            break;    
+            break;
+        case actionType.SET_MODIFY_ITEM:
+            return{
+                ...state,
+                modifyItem: action.modifyItem,
+            }
+            break;   
+             
         case actionType.SET_KITCHEN_ORDERS:
             return{
                 ...state,
