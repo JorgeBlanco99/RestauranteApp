@@ -71,10 +71,19 @@ const Header = () => {
 
             </div>
             <div className="relative">
-            <motion.img 
+            { user &&(<motion.img 
               whileTap={{scale:0.6}} 
               src={user?.photoURL ?? Logo} className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-x1 cursor-pointer rounded-full"
               alt="userprofile" onClick={login}/>
+            )} { !user&&(
+              <Link to={"/login"}> 
+            <motion.img 
+              whileTap={{scale:0.6}} 
+              src={user?.photoURL ?? Logo} className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-x1 cursor-pointer rounded-full"
+              alt="userprofile"/>
+              </Link>
+            )}
+
                 {isMenu && (
                   <motion.div initial={{opacity:0 , scale:0.6}}
                   animate={{opacity:1 , scale:1}}
@@ -92,9 +101,9 @@ const Header = () => {
                     }{
                     user && user.rol === "admin" && ( 
 
-                      <Link to={"/rolGestion"}> 
+                      <Link to={"/products"}> 
                       <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 
-                      transition-all duration-75 ease-out text-textColor' onClick={()=>setIsMenu(false)}> Gestionar roles <MdAdd/></p>
+                      transition-all duration-75 ease-out text-textColor' onClick={()=>setIsMenu(false)}>Modificar Producto<MdAdd/></p>
                       </Link>
                     )
 
