@@ -27,7 +27,17 @@ const KitchenView = () => {
   useEffect(() => {fetchData()},[]);
 
   return (
+    
     <div className='w-full flex items-center gap-3 my-12 overflow-x-hidden flex-wrap justify-center '>
+      <div>
+
+   
+      <div  className=' flex items-center justify-center'>
+        <p className='text-2xl font-semibold capitalize text-headingColor relative before:absolute before:rounded-lg before:content 
+        before:w-40 before:h-2 before:-bottom-2 before:-left-8 before:bg-gradient-to-tr from-blue-500 to-blue-300 transition-all
+         ease-in-out duration-100'> Pedidos</p>
+         </div>
+      <div>
        {kitchenOrders && kitchenOrders.length > 0? (
            kitchenOrders.map((item) =>(
             <div key={item?.id} className='flex flex-col h-200 w-300 min-w-[300px] my-12 md:w-340 md:min-w-[340px]  shadow-md rounded-lg  backdrop-blur-lg hover:drop-shadow-lg'>
@@ -99,6 +109,8 @@ const KitchenView = () => {
            <p className='text-xl font-semibold'> No Quedan Pedidos Buen Trabajo</p>
         </div>
         )}
+              </div>
+              </div>
     </div>
   )
 }
