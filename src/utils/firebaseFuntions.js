@@ -1,19 +1,17 @@
 import { async } from "@firebase/util";
 import { collection, doc, getDocs, orderBy, query, setDoc, where,getFirestore} from "firebase/firestore";
-import { firestore, app} from "../firebase.config";
-
+import { firestore} from "../firebase.config";
 
 
 //guardar un elemento fooditem
 export const saveItem = async(data) => {
-    await setDoc(doc(firestore,'foodItems',`${Date.now()}`), data, {
-        merge: true
+    firestore.collection("foodItems").doc(`${Date.now()}`).set(data).then(() => {
     });
+
 };
 
 export const saveRestaurantInfo = async(data) => {
-    await setDoc(doc(firestore,'restaurant',`${Date.now()}`), data, {
-        merge: true
+    firestore.collection("restaurant").doc(`${Date.now()}`).set(data).then(() => {
     });
 };
 
@@ -41,28 +39,21 @@ export const getAllOrders = async () => {
 
 export const delateOrder = async (id) => {
     const items = await  getDocs(query(collection(firestore,"orders"),where('id', '==', id)));
-    //firestore.collection('orders').where('id', '==', id).get();
     items.forEach((element) => {
-       // element.ref.delete();
-        console.log(`deleted: ${element.id}`);
+        firestore.collection("orders").doc(`${element.id}`).delete();
     }); 
 };
 
 export const deleteProductId = async (id) => {
-    const db = getFirestore(app);
     const items = await  getDocs(query(collection(firestore,"foodItems"),where('id', '==', id)));
-    //firestore.collection('orders').where('id', '==', id).get();
     items.forEach((element) => {
-        db.collection('foodItems').doc(element.id).delete();
-        console.log(`deleted: ${element.id}`);
+        firestore.collection("foodItems").doc(`${element.id}`).delete();
     }); 
 };
+
 export const updateProdutId = async (id , item) => {
-    console.log("hola");
     const items = await  getDocs(query(collection(firestore,"foodItems"),where('id', '==', id)));
-    //firestore.collection('orders').where('id', '==', id).get();
     items.forEach((element) => {
-       element.ref.update(item);
-        console.log(`update: ${element.id}`);
+        firestore.collection("foodItems").doc(`${element.id}`).update(item);
     }); 
 };

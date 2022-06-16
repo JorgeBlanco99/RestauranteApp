@@ -5,7 +5,7 @@ import {motion} from "framer-motion"
 import notFound from "./img/notFound.png";
 import { useStateValue} from '../context/StateProvider';
 import { actionType } from '../context/reducer';
-import { deleteProductId } from '../utils/firebaseFuntions';
+import { deleteProductId,getAllFoodItems } from '../utils/firebaseFuntions';
 import ModifyContainer from './ModifyContainer';
 import { Link } from 'react-router-dom';
 
@@ -14,6 +14,14 @@ const ModifyItemsContainer = ({ flag , data }) => {
   const[items,setItems] = useState([]);
 
   const [{modifyItem}, dispatch] = useStateValue();
+  const fetchData = async () =>{
+    await getAllFoodItems().then (data => {
+      dispatch({
+        type: actionType.SET_FOOD_ITEMS,
+        foodItems : data
+      })
+    })
+  };
 
   const updateProduct = (item) => {
       dispatch({
@@ -21,10 +29,12 @@ const ModifyItemsContainer = ({ flag , data }) => {
         modifyItem: item,
       });
       console.log(item);
+      fetchData();
   };
 
   const deleteProduct = (id) => {
     deleteProductId(id);
+    fetchData();
   };
   return (
   <div className={`w-full flex items-center gap-3 my-12${flag ? 'overflow-x-scroll scrollbar-none scroll-smooth' : 'overflow-x-hidden flex-wrap justify-center '}`}>

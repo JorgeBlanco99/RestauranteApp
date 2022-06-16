@@ -5,7 +5,6 @@ import { categories } from '../utils/data';
 import Loader from './Loader';
 import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from 'firebase/storage';
 import { storage } from '../firebase.config';
-import { onSnapshot } from 'firebase/firestore';
 import { updateProdutId } from '../utils/firebaseFuntions';
 import { useStateValue } from '../context/StateProvider';
 import { getAllFoodItems } from '../utils/firebaseFuntions';
@@ -179,7 +178,7 @@ const ModifyContainer = (item) => {
                 </label>
                 </> 
                 : <><div className='relative h-full'>
-                      <img src={imageAsset} alt = "imagen subida" className='w-full h-full object-cover'/>
+                      <img src={imageAsset} alt = "No hay imagen" className='w-full h-full object-cover'/>
                       <button type='button' className='absolute bottom-3 right-3 p-3 rounded-full bg-slate-500 text-xl
                        cursor-pointer outline-none hover:shadow-md duration-300 transition-all ease-in-out' onClick={delateImage}> 
                        <MdDelete className='text-white' /></button>

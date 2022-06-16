@@ -21,6 +21,7 @@ const KitchenView = () => {
   };
   const orderDone = (id) => {
     delateOrder(id);
+    fetchData();
   };
 
 

@@ -1,9 +1,9 @@
-import { initializeApp,getApp,getApps } from "firebase/app";
-import {getFirestore} from "firebase/firestore";
-import {getStorage} from "firebase/storage";
+  import firebase from "firebase/compat/app";
+  import "firebase/compat/firestore";
+  import "firebase/compat/storage";
 
-const firebaseConfig = {
 
+  const config = {
     apiKey: "AIzaSyAkN_Eo5z_sP1LooDNl1tKhl9ShzjucUqQ",
   
     authDomain: "restauranteapp-72bd6.firebaseapp.com",
@@ -17,10 +17,11 @@ const firebaseConfig = {
     messagingSenderId: "697577717342",
   
     appId: "1:697577717342:web:33cb9d97d5c65e32263ecf"
-  
   };
   
-  const app = getApps.length > 0 ? getApp() : initializeApp(firebaseConfig);
-  const firestore = getFirestore(app);
-  const storage = getStorage(app);
-  export{app,firestore, storage};
+  const app = firebase.apps.length > 0 ? firebase.apps.length :firebase.initializeApp(config);;
+
+  const firestore = firebase.firestore();
+   const storage = firebase.storage(app);
+
+  export { firestore,app,storage};
