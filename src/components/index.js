@@ -16,6 +16,12 @@ export {default as ReservationView} from './ReservationView'
 export {default as ReservationContainer} from './ReservationContainer'
 export {default as ManagerView} from './ManagerView'
 export {default as RestaurantInformation} from './RestaurantInformation'
+export {default as QrGenerator} from './QrGenerator'
+export {default as MenuView} from './MenuView'
+
+
+
+
 
 
 

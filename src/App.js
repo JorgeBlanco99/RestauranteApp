@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { MainContainer, Header, CreateContainer,Login,KitchenView, ProductManage, ModifyContainer,ReservationView,ManagerView} from './components';
+import { Route, Routes} from 'react-router-dom';
+import { MainContainer, Header, CreateContainer,Login,KitchenView, ProductManage, ModifyContainer,ReservationView,ManagerView,MenuView,QrGenerator} from './components';
 import {AnimatePresence} from "framer-motion";
 import { useStateValue } from './context/StateProvider';
 import { getAllFoodItems } from './utils/firebaseFuntions';
@@ -8,6 +8,7 @@ import { actionType } from './context/reducer';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { app } from './firebase.config';
+import { Redirect } from 'react-router'
 
 const auth = getAuth(app);
 const firestore = getFirestore(app);
@@ -71,8 +72,8 @@ const App = () => {
           <Route path="/modify" element={<ModifyContainer/>} />
           <Route path="/reservation" element={<ReservationView/>} />
           <Route path="/gestion" element={<ManagerView/>} />
-
-          
+          <Route path="/generadorQr" element={<QrGenerator/>} />    
+          <Route path="/menu/:table/:type" element={<MenuView/>} />
         </Routes>
 
       </main>

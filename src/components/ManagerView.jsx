@@ -3,6 +3,7 @@ import {RiReservedFill} from 'react-icons/ri'
 import { gestion } from '../utils/data';
 import {motion} from "framer-motion"
 import RestaurantInformation from './RestaurantInformation';
+import QrGenerator from './QrGenerator';
 import { useStateValue } from "../context/StateProvider";
 
 const ManagerView = () => {
@@ -34,6 +35,9 @@ const ManagerView = () => {
                 )}
                 { filter && filter === "restaurant" && (
                        <RestaurantInformation/>
+                )}
+                 { filter && filter === "qrGenerator" && (
+                       <QrGenerator/>
                 )}
             </div>
     </div>

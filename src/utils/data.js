@@ -62,6 +62,11 @@ export const gestion = [
         name: "Datos",
         urlParamName: "restaurant",
     },
+    {
+        id: 2,
+        name: "Generador QR",
+        urlParamName: "qrGenerator",
+    },
 ];
 
 export const weekDays = [
@@ -140,4 +145,18 @@ export const hours = [
         urlParamName: "7",
     },
 
+];
+
+export const clientTypes = [
+    {
+        id: 1,
+        name: "Buffet Libre",
+        urlParamName: "buffet",
+    },
+    {
+        id: 2,
+        name: "Normal",
+        urlParamName: "normal",
+    },
+   
 ];
