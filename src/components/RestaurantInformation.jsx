@@ -2,6 +2,7 @@ import React, {useEffect, useState } from 'react'
 import { motion } from 'framer-motion';
 import {MdOutlineSchedule} from 'react-icons/md';
 import {GiTable} from 'react-icons/gi';
+import {BiEuro} from 'react-icons/bi';
 import { saveRestaurantInfo,getRestaurantInfo } from '../utils/firebaseFuntions';
 import { useStateValue } from '../context/StateProvider';
 import { actionType } from '../context/reducer';
@@ -24,6 +25,7 @@ const RestaurantInformation = ()  => {
   console.log(RestaurantInfo);
   const [lunch,setLunch] = useState(RestaurantInfo?.lunch);
   const [tables,setTables] = useState(RestaurantInfo?.tables);
+  const [buffetPrice,setBuffetPrice] = useState(RestaurantInfo?.buffetPrice);
   const [dinner,setDinner] = useState(RestaurantInfo?.dinner);
   const [fields,setFields] = useState(false); /**for errors */
   const [alertStatus,setAlertStatus] = useState("danger");
@@ -47,6 +49,7 @@ const saveInfo = () =>{
         lunch: lunch,
         dinner: dinner,
         tables: tables,
+        buffetPrice : buffetPrice,
       }
 
       saveRestaurantInfo(data);
@@ -75,6 +78,7 @@ const clearData= () => {
   setLunch("");
   setDinner("");
   setTables("");
+  setBuffetPrice("");
 }
  return (
     <div className='w-full min-h-screen flex items-center justify-center items-top'>
@@ -109,6 +113,12 @@ const clearData= () => {
           <GiTable className='text-x1 text-gray-700'/>
           <input type="text" requiered value={tables} onChange={(e) => setTables(e.target.value)}
            placeholder="Numero de mesas"
+          className='w-full h-full text-lg bg-transparent font-semibold outline-none text-textColor'/>
+        </div>
+        <div className=' w-full py-2 border-b border-gray-300 flex items-center gap-3'>
+          <BiEuro className='text-x1 text-gray-700'/>
+          <input type="text" requiered value={buffetPrice} onChange={(e) => setBuffetPrice(e.target.value)}
+           placeholder="Precio buffet"
           className='w-full h-full text-lg bg-transparent font-semibold outline-none text-textColor'/>
         </div>
         
