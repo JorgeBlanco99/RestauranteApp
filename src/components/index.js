@@ -18,6 +18,7 @@ export {default as ManagerView} from './ManagerView'
 export {default as RestaurantInformation} from './RestaurantInformation'
 export {default as QrGenerator} from './QrGenerator'
 export {default as MenuView} from './MenuView'
+export {default as OrderItem} from './OrderItem'
 
 
 

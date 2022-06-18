@@ -69,3 +69,7 @@ export const getBillPrice = async (id) => {
     const bill =  item.docs.map((doc)=> doc.data());
     return( parseFloat(bill[0].price));
 };
+export const getPendingOrders = async (id) => {
+    const orders = await getDocs(query(collection(firestore,"orders"),where('table', '==', id)));
+    return( orders.docs.map((doc)=> doc.data()));
+};
