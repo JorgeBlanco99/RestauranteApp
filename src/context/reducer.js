@@ -6,6 +6,7 @@ export const actionType = {
     SET_KITCHEN_ORDERS: 'SET_KITCHEN_ORDERS',
     SET_MODIFY_ITEM : 'SET_MODIFY_ITEM',
     SET_RESTAURANT_INFO: 'SET_RESTAURANT_INFO',
+    SET_CLIENT_SESSION: 'SET_CLIENT_SESSION'
 };
 
 const reducer = (state, action) => {
@@ -21,6 +22,12 @@ const reducer = (state, action) => {
             return{
                 ...state,
                 RestaurantInfo: action.RestaurantInfo,
+            }
+            break;
+        case actionType.SET_CLIENT_SESSION:
+            return{
+                ...state,
+                clientSession: action.clientSession,
             }
             break;
         case actionType.SET_MODIFY_ITEM:

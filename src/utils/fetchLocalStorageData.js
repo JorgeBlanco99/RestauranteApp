@@ -12,3 +12,11 @@ export const fetchCart = () => {
             : localStorage.clear();
     return cartInfo ? cartInfo : [];
 };
+
+export const fetchClient = () => {
+    const clientInfo = 
+        localStorage.getItem("clientInfo") !== "undefined"
+            ? JSON.parse(localStorage.getItem("clientInfo"))
+            : localStorage.clear();
+    return clientInfo ? clientInfo : [];
+};

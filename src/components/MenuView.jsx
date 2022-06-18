@@ -3,7 +3,7 @@ import MenuContainer from './MenuContainer';
 import CartContainer from './CartContainer'
 
 import { useStateValue } from "../context/StateProvider";
-
+import { useSearchParams } from "react-router-dom";
 
 const MenuView = () => {
     const[{foodItems, cartShow}, dispatch] = useStateValue();

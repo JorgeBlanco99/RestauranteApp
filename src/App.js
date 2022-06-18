@@ -9,6 +9,8 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
 import { app } from './firebase.config';
 import { Redirect } from 'react-router'
+import { useSearchParams } from "react-router-dom";
+
 
 const auth = getAuth(app);
 const firestore = getFirestore(app);
@@ -56,8 +58,25 @@ const App = () => {
       })
     })
   };
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [{clientSession}, dispatch2] = useStateValue();
+  
+  const LoadClientSession = () => {
+    const sessionData = {
+      table:  searchParams.get('table'),
+      type:   searchParams.get('type'),
+    };
+    dispatch2({
+      type: actionType.SET_CLIENT_SESSION,
+      clientSession: sessionData,
+    });
+    localStorage.setItem('clientSession', JSON.stringify(sessionData));
 
+    console.log(clientSession);
+};
   useEffect(() => {fetchData()},[]);
+  useEffect(() => {LoadClientSession()},[]);
+
   return (
   <AnimatePresence exitBeforeEnter>
     <div className="w-screen h-auto flex flex-col bg-primary">
@@ -73,7 +92,7 @@ const App = () => {
           <Route path="/reservation" element={<ReservationView/>} />
           <Route path="/gestion" element={<ManagerView/>} />
           <Route path="/generadorQr" element={<QrGenerator/>} />    
-          <Route path="/menu/:table/:type" element={<MenuView/>} />
+          <Route path="/menu" element={<MenuView/>}/>
         </Routes>
 
       </main>
