@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import {MdOutlineKeyboardBackspace} from 'react-icons/md'
 import {RiRefreshLine} from 'react-icons/ri'
-import { saveOrder } from '../utils/firebaseFuntions';
+import { saveOrder, getBillPrice,updateBillPrice} from '../utils/firebaseFuntions';
 import { useStateValue} from '../context/StateProvider';
 import { actionType } from '../context/reducer';
 import CardItem from './CardItem';
@@ -12,12 +12,32 @@ const CartContainer = () => {
     const[{cartShow , cartItems }, dispatch] = useStateValue();
     const [flag, setFlag] = useState(1);
     const [tot, setTot] = useState(0);
-  const  order = () =>{
+    const [{clientSession}, dispatch2] = useStateValue();
+  const  order = async () =>{
+     let price = await getBillPrice(clientSession.table);
     const data = {
       id: `${Date.now()}`,
-      produc: Object.assign({},cartItems)
+      produc: Object.assign({},cartItems),
+      table: clientSession.table,
+      type: clientSession.type,
     }
-    
+    if(clientSession.type === "buffet"){
+      //solo añadir bebidas
+      cartItems.forEach(function(item) {
+        if(item.category === "bebidas"){
+          price += item.qty * item.price;
+        }
+      });
+    }
+    if(clientSession.type === "normal"){
+      price += tot;
+    }
+    const dataPrice = {
+      table: clientSession.table,
+      type: clientSession.type,
+      price: price
+    }
+    updateBillPrice(dataPrice);
     saveOrder(data);
   };
 
@@ -26,7 +46,6 @@ const CartContainer = () => {
       return accumulator + item.qty * item.price;
     }, 0);
     setTot(totalPrice);
-    console.log(tot);
   }, [tot, flag]);
     
     const showCart = () => {
@@ -35,6 +54,7 @@ const CartContainer = () => {
           cartShow:!cartShow,
         })
       };
+
       const clearCart = () => {
         dispatch({
           type: actionType.SET_CARD_ITEMS,

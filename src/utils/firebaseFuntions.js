@@ -57,3 +57,15 @@ export const updateProdutId = async (id , item) => {
         firestore.collection("foodItems").doc(`${element.id}`).update(item);
     }); 
 };
+
+export const updateBillIdInfo = async(data) => {
+    firestore.collection("bill").doc(data.table).update(data);
+};
+export const updateBillPrice = async(data) => {
+    firestore.collection("bill").doc(data.table).update(data);
+};
+export const getBillPrice = async (id) => {
+    const item = await getDocs(query(collection(firestore,"bill"),where('table', '==', id)));
+    const bill =  item.docs.map((doc)=> doc.data());
+    return( parseFloat(bill[0].price));
+};

@@ -3,7 +3,7 @@ import { Route, Routes} from 'react-router-dom';
 import { MainContainer, Header, CreateContainer,Login,KitchenView, ProductManage, ModifyContainer,ReservationView,ManagerView,MenuView,QrGenerator} from './components';
 import {AnimatePresence} from "framer-motion";
 import { useStateValue } from './context/StateProvider';
-import { getAllFoodItems } from './utils/firebaseFuntions';
+import { getAllFoodItems,updateBillIdInfo } from './utils/firebaseFuntions';
 import { actionType } from './context/reducer';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import { getFirestore, doc, getDoc } from "firebase/firestore";
@@ -65,15 +65,17 @@ const App = () => {
     const sessionData = {
       table:  searchParams.get('table'),
       type:   searchParams.get('type'),
+      price: 0,
     };
     dispatch2({
       type: actionType.SET_CLIENT_SESSION,
       clientSession: sessionData,
     });
     localStorage.setItem('clientSession', JSON.stringify(sessionData));
-
+    updateBillIdInfo(sessionData);
     console.log(clientSession);
 };
+  
   useEffect(() => {fetchData()},[]);
   useEffect(() => {LoadClientSession()},[]);
 
