@@ -8,6 +8,7 @@ import { actionType } from '../context/reducer';
 import CardItem from './CardItem';
 import OrderItem from './OrderItem';
 import {motion} from "framer-motion"
+import ItemsOrderedGestion from './ItemsOrderedGestion'
 
 const CartContainer = () => {
     const[{cartShow , cartItems }, dispatch] = useStateValue();
@@ -16,6 +17,7 @@ const CartContainer = () => {
     const[pending,setPending] = useState(false);
     const [{clientSession}, dispatch2] = useStateValue();
     const [pendingOrders,setPendingOrders] = useState();
+    let OrdenPointer= 0;
   const  order = async () =>{
      let price = await getBillPrice(clientSession.table);
     const data = {
@@ -42,6 +44,7 @@ const CartContainer = () => {
     }
     updateBillPrice(dataPrice);
     saveOrder(data);
+    clearCart();
   };
   const seterPendingOrders  = async () =>{
     let orders = await getPendingOrders(clientSession.table);
@@ -125,8 +128,8 @@ const CartContainer = () => {
         <div className='w-full h-full rounded-t-[2rem] flex flex-col bg-cardBg'>
             <div className='w-full h-340 md:h-42 py-10 px-6 flex flex-col gap-3 overflow-y-auto scrollbar-none'>
                 {pendingOrders && pendingOrders.map(item => (
-                   <OrderItem key={item?.id} item = {item}/>
-                ))}       
+                   <ItemsOrderedGestion key={item?.id} item = {item?.produc}/>
+                ))}      
             </div> 
             {/* cuentas*/}  
             <div className='w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-centerjustify-evenly py-2 px-8'>
