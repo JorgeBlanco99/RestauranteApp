@@ -4,6 +4,7 @@ import { gestion } from '../utils/data';
 import {motion} from "framer-motion"
 import RestaurantInformation from './RestaurantInformation';
 import QrGenerator from './QrGenerator';
+import BillsContainer from './BillsContainer';
 import { useStateValue } from "../context/StateProvider";
 
 const ManagerView = () => {
@@ -38,6 +39,9 @@ const ManagerView = () => {
                 )}
                  { filter && filter === "qrGenerator" && (
                        <QrGenerator/>
+                )}
+                { filter && filter === "bills" && (
+                       <BillsContainer/>
                 )}
             </div>
     </div>

@@ -73,3 +73,7 @@ export const getPendingOrders = async (id) => {
     const orders = await getDocs(query(collection(firestore,"orders"),where('table', '==', id)));
     return( orders.docs.map((doc)=> doc.data()));
 };
+export const getBIllForId = async (id) => {
+    const items = await getDocs(query(collection(firestore,"bill"),where('table', '==', id)));
+    return items.docs.map((doc)=> doc.data());
+};

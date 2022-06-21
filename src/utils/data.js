@@ -63,10 +63,16 @@ export const gestion = [
         urlParamName: "restaurant",
     },
     {
-        id: 2,
-        name: "Generador QR",
+        id: 3,
+        name: "QR",
         urlParamName: "qrGenerator",
     },
+    {
+        id: 4,
+        name: "Cuentas",
+        urlParamName: "bills",
+    },
+
 ];
 
 export const weekDays = [

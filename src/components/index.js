@@ -20,6 +20,7 @@ export {default as QrGenerator} from './QrGenerator'
 export {default as MenuView} from './MenuView'
 export {default as OrderItem} from './OrderItem'
 export {default as ItemsOrderedGestion} from './ItemsOrderedGestion'
+export {default as BillsContainer} from './BillsContainer'
 
 
 
