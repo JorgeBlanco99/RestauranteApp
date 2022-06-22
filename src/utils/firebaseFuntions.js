@@ -11,8 +11,12 @@ export const saveItem = async(data) => {
 };
 
 export const saveRestaurantInfo = async(data) => {
+    const table = {
+        table : data.tables
+      }
     firestore.collection("restaurant").doc(`${Date.now()}`).set(data).then(() => {
     });
+    firestore.collection("reservations").doc("config").update(table);
 };
 
 export const getRestaurantInfo = async () => {
@@ -76,4 +80,55 @@ export const getPendingOrders = async (id) => {
 export const getBIllForId = async (id) => {
     const items = await getDocs(query(collection(firestore,"bill"),where('table', '==', id)));
     return items.docs.map((doc)=> doc.data());
+};
+
+export const saveReservation = async(data) => {
+    firestore.collection("reservations").doc(`${Date.now()}`).set(data).then(() => {
+    });
+};
+
+export const getReservationByDay = async (id,hour) => {
+    const items = await getDocs(query(collection(firestore,"reservations"),where('id', '==', id)));
+    let one= 0;
+    let two= 0;
+    let three = 0 ;
+    let four = 0;
+    let five = 0;
+    let six = 0;
+    let seven = 0;
+    items.docs.map((doc)=>{
+        switch(doc.data().hour){
+            case "1":
+                one++;
+                break;
+             case "2": 
+                two ++;
+                break;
+             case "3":
+                three++;
+                break;
+             case "4": 
+               four++;
+               break;
+             case "5":
+               five++;
+               break;
+             case "6": 
+               six++;
+               break;
+             case "7": 
+               seven++;
+               break;
+           }
+    });
+    const number = {
+        1: one,
+        2: two,
+        3: three,
+        4: four,
+        5: five,
+        6: six,
+        7: seven
+    }
+    return number;
 };

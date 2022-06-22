@@ -1,49 +1,54 @@
-import React, {useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { motion } from 'framer-motion';
-import {MdOutlineSchedule} from 'react-icons/md';
+import { hours } from '../utils/data';
 import {FiMail} from 'react-icons/fi';
 import {FaUserAlt} from 'react-icons/fa';
+import { saveReservation,getReservationByDay } from '../utils/firebaseFuntions';
+import Calendar from 'react-calendar'
+import '../index.css';
 import {BiHourglass} from 'react-icons/bi';
-import { saveRestaurantInfo,getRestaurantInfo } from '../utils/firebaseFuntions';
-import { useStateValue } from '../context/StateProvider';
-import { actionType } from '../context/reducer';
-import { hours } from '../utils/data';
-
-
-
+import {getRestaurantInfo } from '../utils/firebaseFuntions';
 const ReservationContainer =  () => {
-  const [{RestaurantInfo}, dispatch] = useStateValue();
-  const [name,setName] = useState(RestaurantInfo?.name);
-  const [tables,setTables] = useState(RestaurantInfo?.tables);
-  const [email,setEmail] = useState(RestaurantInfo?.email);
+  const [name,setName] = useState("");
+  const [tables,setTables] = useState("");
+  const [email,setEmail] = useState("");
   const [fields,setFields] = useState(false); /**for errors */
   const [alertStatus,setAlertStatus] = useState("danger");
   const [msg,setMsg] = useState(null);
-  const [isLoading,setIsLoading] = useState(false);
-
+  const [date, setDate] = useState(new Date());
+  const [flag, setFlag] = useState(false);
+  const today = new Date();
+  const nextMonth= today.getMonth() +2;
+  let [hoursr, setHoures] = useState("");
+  const [table , setTable] = useState(0);
+  const getTables = async  () => {
+    await getRestaurantInfo().then (data => {
+      const info = data.pop();
+      setTable(info.tables);
+    })
+  }
+  getTables();
+  
 const saveInfo = () =>{
-  setIsLoading(true);
   try{
-    if(!name || !email || !tables){
+    if(!name || !email){
       setFields(true)
       setMsg("Alguno de los valores no esta rellenado");
       setAlertStatus("danger")
       setTimeout(()=>{
         setFields(false)
-        setIsLoading(false)
       },4000)
     }else{
       const data = {
-        id: `${Date.now()}`,
+        id: date ,
         name: name,
         email: email,
-        tables: tables,
+        hour: filter,
       }
 
-     // saveRestaurantInfo(data);
-      setIsLoading(false);
+      saveReservation(data);
       setFields(true);
-      setMsg("Datos añadidos con exito");
+      setMsg("Reserva Completada con exito");
       setAlertStatus("success");
       setTimeout(()=>{
         setFields(false);
@@ -53,36 +58,48 @@ const saveInfo = () =>{
   }catch(error){
     console.log(error);
     setFields(true)
-    setMsg("error al subir la imagen");
+    setMsg("Selecione fecha");
     setAlertStatus("danger")
     setTimeout(()=>{
       setFields(false)
-      setIsLoading(false)
     },4000)
   }
 };
-const clearData= () => {
-  setName("");
-  setEmail("");
-  setTables("");
+const changeDay = async () =>{
+  setTimeout(()=>{
+    setFlag(true)
+  },1000)
+
+  const reservations = await getReservationByDay(date);
+  setHoures(reservations);
+  setFlag(false);
+
 }
 const [filter, setFilter] = useState("reservation");
-
  return (
-  
+ 
     <div className='w-full min-h-screen flex flex-col items-center justify-center items-top'>
       <div className='w-full flex flex-col items-center justify-start lg:justify-center gap-8 py-6 overflow-x-scroll scrollbar-none'>
-                {hours && hours.map(category =>(
-                <motion.div whileTap={{scale: 0.5}}
-                key={category.id} className={`group ${filter === category.urlParamName ? ' bg-blue-500' : 'bg-white'} bg-white hover:bg-blue-500  min-w-[90px] h-28 cursor-pointer rounded-lg drop-shadow-lg flex flex-row gap-3 items-center justify-center w-full duration-150 transition-all`}
-                    onClick={()=> setFilter(category.urlParamName)}>
-                    <div className={`w-10 h-10 rounded-full ${filter === category.urlParamName ? 'bg-white' : 'bg-blue-500' } bg-blue-500 group-hover:bg-white flex justify-center items-center`}>
-                        <BiHourglass className={`${filter == category.urlParamName ? 'text-black': ' text-cyan-500'  } group-hover:text-black text-lg`}/>
-                    </div>
-                    <p className={`group-hover:text-white ${filter === category.urlParamName ? 'text-white':'text-black' }`}>{category.name}</p>
-                </motion.div>
-                ))}
-      </div>
+        <div>
+          <Calendar onChange={setDate} onClickDay={()=> changeDay(true)} value={date} minDate={new Date()} maxDate={new Date(today.getFullYear(), nextMonth, today.getDay())}/>
+        </div>
+        { flag&& (
+
+<div className='w-full flex flex-col items-center justify-start lg:justify-center gap-8 py-6 overflow-x-scroll scrollbar-none'>
+        {hours && hours.map(hour =>(
+        <motion.div whileTap={{scale: 0.5}} oncl
+        key={hour.id} className={`group ${filter === hour.urlParamName ? ' bg-blue-500' : 'bg-white'} bg-white hover:bg-blue-500  min-w-[90px] h-28 cursor-pointer rounded-lg drop-shadow-lg flex flex-row gap-3 items-center justify-center w-full duration-150 transition-all`}
+            onClick={()=> setFilter(hour.urlParamName)}>
+            <div className={`w-10 h-10 rounded-full ${filter === hour.urlParamName ? 'bg-white' : 'bg-blue-500' } bg-blue-500 group-hover:bg-white flex justify-center items-center`}>
+                <BiHourglass className={`${filter == hour.urlParamName ? 'text-black': ' text-cyan-500'  } group-hover:text-black text-lg`}/>
+            </div>
+            <p className={`group-hover:text-white ${filter === hour.urlParamName ? 'text-white':'text-black' }`}>{hour.name}</p>
+            <p className={`group-hover:text-white ${filter === hour.urlParamName ? 'text-white':'text-black' }`}>{hoursr[hour.id]}/{table} </p>
+        </motion.div>
+        ))}
+    </div>
+        ) }
+        </div>
       <div className=' w-[90%] md:w-[75%] border border-gray-200 rounded-lg p-4 flex flex-col justify-center items-center gap-4'>
         {fields && (
             <motion.p
@@ -98,6 +115,7 @@ const [filter, setFilter] = useState("reservation");
              {msg}
             </motion.p>
         )}
+        
       <p>Datos de la reserva</p>
       <div className=' w-full py-2 border-b border-gray-300 flex items-center gap-3'>
           <FaUserAlt className='text-x1 text-gray-700'/>
