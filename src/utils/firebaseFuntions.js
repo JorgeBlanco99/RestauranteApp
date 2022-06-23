@@ -143,3 +143,8 @@ export const delateReservation = async (data) => {
         firestore.collection("reservations").doc(`${element.id}`).delete();
     }); 
 };
+
+export const getReservationByUid = async (uid) => {
+    const items = await getDocs(query(collection(firestore,"reservations"),where('uid', '==', uid)));
+    return items.docs.map((doc)=> doc.data());
+};
