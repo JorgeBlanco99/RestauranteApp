@@ -5,6 +5,7 @@ import {motion} from "framer-motion"
 import RestaurantInformation from './RestaurantInformation';
 import QrGenerator from './QrGenerator';
 import BillsContainer from './BillsContainer';
+import ManagerReservationContainer from './ManagerReservationContainer';
 import { useStateValue } from "../context/StateProvider";
 
 const ManagerView = () => {
@@ -32,7 +33,7 @@ const ManagerView = () => {
             <div className='w-full'>
                 {
                     filter && filter === "reservation" && (
-                        <p>Reservas</p>
+                        <ManagerReservationContainer/>
                 )}
                 { filter && filter === "restaurant" && (
                        <RestaurantInformation/>

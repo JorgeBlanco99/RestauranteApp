@@ -21,6 +21,8 @@ export {default as MenuView} from './MenuView'
 export {default as OrderItem} from './OrderItem'
 export {default as ItemsOrderedGestion} from './ItemsOrderedGestion'
 export {default as BillsContainer} from './BillsContainer'
+export {default as MyReservations} from './MyReservations'
+export {default as ManagerReservationContainer} from './ManagerReservationContainer'
 
 
 

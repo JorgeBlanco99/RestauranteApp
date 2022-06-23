@@ -8,6 +8,7 @@ import Calendar from 'react-calendar'
 import '../index.css';
 import {BiHourglass} from 'react-icons/bi';
 import {getRestaurantInfo } from '../utils/firebaseFuntions';
+import { useStateValue} from '../context/StateProvider';
 const ReservationContainer =  () => {
   const [name,setName] = useState("");
   const [tables,setTables] = useState("");
@@ -17,6 +18,7 @@ const ReservationContainer =  () => {
   const [msg,setMsg] = useState(null);
   const [date, setDate] = useState(new Date());
   const [flag, setFlag] = useState(false);
+  const[{user}, dispatch] = useStateValue();
   const today = new Date();
   const nextMonth= today.getMonth() +2;
   let [hoursr, setHoures] = useState("");
@@ -44,6 +46,7 @@ const saveInfo = () =>{
         name: name,
         email: email,
         hour: filter,
+        uid: user.uid,
       }
 
       saveReservation(data);

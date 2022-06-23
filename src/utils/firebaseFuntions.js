@@ -132,3 +132,14 @@ export const getReservationByDay = async (id,hour) => {
     }
     return number;
 };
+
+export const getReservationByName = async (name) => {
+    const items = await getDocs(query(collection(firestore,"reservations"),where('name', '==', name)));
+    return items.docs.map((doc)=> doc.data());
+};
+export const delateReservation = async (data) => {
+    const items = await  getDocs(query(collection(firestore,"reservations"),where('email', '==', data.email),where('name', '==', data.name),where('hour', '==', data.hour)));
+    items.forEach((element) => {
+        firestore.collection("reservations").doc(`${element.id}`).delete();
+    }); 
+};

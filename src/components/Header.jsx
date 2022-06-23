@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import Logo from './img/logo.jpg'
 import { MdOutlineShoppingBasket, MdAdd, MdLogout } from "react-icons/md";
 import { GiChefToque } from "react-icons/gi";
+import { RiReservedFill } from "react-icons/ri";
 import {Link} from "react-router-dom";
 import { motion } from 'framer-motion';
 import { getAuth, signInWithPopup, GoogleAuthProvider, signOut} from "firebase/auth";
@@ -128,6 +129,10 @@ const Header = () => {
                     )
 
                   } 
+                  <Link to={"/misreservas"}> 
+                      <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 
+                      transition-all duration-75 ease-out text-textColor' onClick={()=>setIsMenu(false)}>Mis Reservas <RiReservedFill/></p>
+                      </Link>
                 <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 
                 transition-all duration-75 ease-out text-textColor'  onClick={logout}>Cerrar sesion <MdLogout/></p>
               </motion.div>
