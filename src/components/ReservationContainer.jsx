@@ -91,7 +91,7 @@ const [filter, setFilter] = useState("reservation");
 <div className='w-full flex flex-col items-center justify-start lg:justify-center gap-8 py-6 overflow-x-scroll scrollbar-none'>
         {hours && hours.map(hour =>(
         <motion.div whileTap={{scale: 0.5}} oncl
-        key={hour.id} className={`group ${filter === hour.urlParamName ? ' bg-blue-500' : 'bg-white'} bg-white hover:bg-blue-500  min-w-[90px] h-28 cursor-pointer rounded-lg drop-shadow-lg flex flex-row gap-3 items-center justify-center w-full duration-150 transition-all`}
+        key={hour.id} className={`group ${filter === hour.urlParamName ? ' bg-blue-500' : 'bg-white'} bg-white hover:bg-blue-500  min-w-[90px] h-14 cursor-pointer rounded-lg drop-shadow-lg flex flex-row gap-3 items-center justify-center w-full duration-150 transition-all`}
             onClick={()=> setFilter(hour.urlParamName)}>
             <div className={`w-10 h-10 rounded-full ${filter === hour.urlParamName ? 'bg-white' : 'bg-blue-500' } bg-blue-500 group-hover:bg-white flex justify-center items-center`}>
                 <BiHourglass className={`${filter == hour.urlParamName ? 'text-black': ' text-cyan-500'  } group-hover:text-black text-lg`}/>
