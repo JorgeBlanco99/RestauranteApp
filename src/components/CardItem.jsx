@@ -60,7 +60,7 @@ const CardItem = ({item, setFlag, flag}) => {
          <motion.div  whileTap={{scale: 0.75}} onClick={()=> updateQty("del",item?.id)}>
             <BiMinus className="text-white"/>
          </motion.div>
-         <p className='w-5 h-5 rounded-sm bg-cardBg text-white flex items-center justify-center'> {qty}</p>
+         <p className='w-5 h-5 rounded-sm bg-cardBg text-black flex items-center justify-center'> {qty}</p>
          <motion.div whileTap={{scale: 0.75}} onClick={()=> updateQty("add",item?.id)}> 
             <BiPlus className="text-white"/>
          </motion.div>

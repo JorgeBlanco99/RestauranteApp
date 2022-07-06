@@ -91,14 +91,14 @@ const CartContainer = () => {
         
         {!pending&&(
         cartItems && cartItems.length > 0 ? (
-        <div className='w-full h-full rounded-t-[2rem] flex flex-col bg-cardBg'>
-            <div className='w-full h-340 md:h-42 py-10 px-6 flex flex-col gap-3 overflow-y-auto scrollbar-none'>
+        <div className='w-full h-full rounded-t-[2rem] flex flex-col bg-cardBg justify-between'>
+            <div className='w-full h-600 md:h-42 py-10 px-6 flex flex-col gap-3 overflow-y-auto scrollbar-none'>
                 {cartItems && cartItems.map(item => (
                    <CardItem key={item?.id} item = {item} setFlag={setFlag} flag={flag}/>
                 ))}       
             </div> 
             {/* cuentas*/}  
-            <div className='w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-centerjustify-evenly py-2 px-8'>
+            <div className='w-full flex-3 bg-cartTotal rounded-t-[2rem] flex flex-col items-centerjustify-evenly jus py-8 px-8'>
                 <div className='w-full flex flex-colitems-center justify-between'>
                     <p className='text-white'> subtotal:</p>
                     <p className='text-white'>{tot} €</p>
@@ -111,7 +111,7 @@ const CartContainer = () => {
                     <p className='text-white'> {tot} €</p>
                 </div>
                 <motion.button whileTap={{scale:0.75}}
-                type="button" className='w-full p-2 rounded-full bg-blue-600 text-white text-lg my-2 hover shadow-lg' onClick={order}>
+                type="button" className='w-full p-2 rounded-full  bg-emerald-500 text-white text-lg my-2 hover shadow-lg' onClick={order}>
                     Pedir
                 </motion.button>
             </div>          
@@ -126,7 +126,7 @@ const CartContainer = () => {
         {pending&&(
         pendingOrders && pendingOrders.length > 0 ? (
         <div className='w-full h-full rounded-t-[2rem] flex flex-col bg-cardBg'>
-            <div className='w-full h-340 md:h-42 py-10 px-6 flex flex-col gap-3 overflow-y-auto scrollbar-none'>
+            <div className='w-full h-600 md:h-42 py-10 px-6 flex flex-col gap-3 overflow-y-auto scrollbar-none'>
                 {pendingOrders && pendingOrders.map(item => (
                    <ItemsOrderedGestion key={item?.id} item = {item?.produc}/>
                 ))}      
