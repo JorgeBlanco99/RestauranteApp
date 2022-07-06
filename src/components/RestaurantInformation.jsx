@@ -81,7 +81,7 @@ const clearData= () => {
   setBuffetPrice("");
 }
  return (
-    <div className='w-full min-h-screen flex items-center justify-center items-top'>
+    <div className='w-full min-h-screen flex py-6 items-start justify-center'>
       <div className=' w-[90%] md:w-[75%] border border-gray-200 rounded-lg p-4 flex flex-col justify-center items-center gap-4'>
         {fields && (
             <motion.p

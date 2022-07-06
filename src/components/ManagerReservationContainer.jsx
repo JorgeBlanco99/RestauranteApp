@@ -61,7 +61,7 @@ const ManagerReservationContainer = () => {
     setName("");
   }
   return (
-    <div className='w-full min-h-screen flex items-center justify-center'>
+    <div className='w-full min-h-screen flex py-6 items-start justify-center'>
     {!reservation && (
      <div className=' w-[90%] md:w-[75%] border border-gray-200 rounded-lg p-4 flex flex-col justify-center items-center gap-4'>
       {fields && (
@@ -91,7 +91,7 @@ const ManagerReservationContainer = () => {
     )}
 
     {reservation && reservation.map(res =>(
-        <div className={`w-full flex items-center`}>
+        <div className={`w-full flex items-center justify-center`}>
              <div key={res?.name} className='flex flex-col h-200 w-300 min-w-[300px] my-12 md:w-340 md:min-w-[340px]  shadow-md rounded-lg  backdrop-blur-lg hover:drop-shadow-lg'>
              <div className='w-full flex flex-col items-center justify-center'>
                  <p className='text-textColor font-semibold  text-base md:text-lg'> Nombre: {res.name}</p>
@@ -103,7 +103,6 @@ const ManagerReservationContainer = () => {
                  <div className='w-full  flex items-center justify-center'>
                   <motion.div whileTap={{scale: 0.6}} className='w-10 h-10 rounded-full bg-blue-400 flex items-center justify-center cursor-pointer hover:shadow-md'
                     onClick={() => doneReservation(res)}>
-                        {/*En el onclick del motion.div hay que gestionar la impresion*/}
                       <TiTick className='text-white' />
                   </motion.div>
              </div>         

@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import {QRCodeCanvas} from 'qrcode.react';
-import {MdFastfood} from 'react-icons/md';
+import {GiTable} from 'react-icons/gi';
 import { clientTypes } from '../utils/data';
 
 const QrGenerator = () => {
@@ -30,7 +30,7 @@ const QrGenerator = () => {
     };
 
   return (
-    <div className='w-full min-h-screen flex items-center justify-center'>
+    <div className='w-full min-h-screen flex py-6 items-start justify-center'>
     <div className=' w-[90%] md:w-[75%] border border-gray-200 rounded-lg p-4 flex flex-col justify-center items-center gap-4'>
         <div className='w-full'>
           <select onChange={(e)=>setClientType(e.target.value)} className="outline-none w-full text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer">
@@ -43,7 +43,7 @@ const QrGenerator = () => {
           </select>
         </div>
       <div className=' w-full py-2 border-b border-gray-300 flex items-center gap-3'>
-        <MdFastfood className='text-x1 text-gray-700'/>
+        <GiTable className='text-x1 text-gray-700'/>
         <input type="text" requiered value={table} onChange={(e) => settable(e.target.value)}
          placeholder="Numero de mesa"
         className='w-full h-full text-lg bg-transparent font-semibold outline-none text-textColor'/>

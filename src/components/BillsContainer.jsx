@@ -31,7 +31,7 @@ const BillsContainer = () => {
     settable("");
   }
   return (
-    <div className='w-full min-h-screen flex items-center justify-center'>
+    <div className='w-full min-h-screen flex py-6 items-start justify-center'>
     {!bill && (
      <div className=' w-[90%] md:w-[75%] border border-gray-200 rounded-lg p-4 flex flex-col justify-center items-center gap-4'>
       {fields && (
@@ -61,7 +61,7 @@ const BillsContainer = () => {
     )}
 
     {bill && (
-        <div className={`w-full flex items-center`}>
+        <div className={`w-full flex items-center justify-center`}>
              <div key={bill?.table} className='flex flex-col h-200 w-300 min-w-[300px] my-12 md:w-340 md:min-w-[340px]  shadow-md rounded-lg  backdrop-blur-lg hover:drop-shadow-lg'>
              <div className='w-full flex flex-col items-center justify-center'>
                  <p className='text-textColor font-semibold  text-base md:text-lg'> Mesa: {bill[0]?.table}</p>
