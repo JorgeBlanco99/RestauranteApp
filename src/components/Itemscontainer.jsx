@@ -22,7 +22,7 @@ const Itemscontainer = ({ flag , data }) => {
     <div className={`w-full flex items-center gap-3 my-12${flag ? 'overflow-x-scroll scrollbar-none scroll-smooth' : 'overflow-x-hidden flex-wrap justify-center '}`}>
        {data && data.length > 0? (
            data.map((item) =>(
-            <div key={item?.id} className='flex flex-col h-200 w-300 min-w-[300px] my-12 md:w-340 md:min-w-[340px]  shadow-md rounded-lg  backdrop-blur-lg hover:drop-shadow-lg'>
+            <div key={item?.id} className='flex flex-col h-200 w-300 min-w-[300px] my-6 md:w-340 md:min-w-[340px]  shadow-md rounded-lg  backdrop-blur-lg hover:drop-shadow-lg'>
             <div className='w-full  flex items-center justify-between'>
                 <motion.div whileHover={{scale: 1.1}}  className='w-20 h-30 -mt-8'> 
                     <img  src = {item?.imageURl} alt="Foto Producto" className='w-full h-full object-contain'/>
