@@ -20,6 +20,7 @@ const Login = () => {
   const [fields,setFields] = useState(false); /**for errors */
   const [alertStatus,setAlertStatus] = useState("danger");
   const [msg,setMsg] = useState(null);
+  const [rol,setRol] = useState("client");
     const [category,setCategory] = useState(null);
     const auth = getAuth(app);
     const firestore = getFirestore(app);
@@ -94,8 +95,9 @@ const Login = () => {
 
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
-    const rol = e.target.elements.rol.value;
-
+    if(user && user.rol === "admin"){
+      setRol(e.target.elements.rol.value)
+    }
     if (isRegistering) {
       registerUser(email, password, rol);
     } else {
