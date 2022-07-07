@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Logo from './img/logo.jpg'
+import userLogo from './img/userLogo.png'
 import { MdOutlineShoppingBasket, MdAdd, MdLogout } from "react-icons/md";
 import { GiChefToque } from "react-icons/gi";
 import { RiReservedFill } from "react-icons/ri";
@@ -74,13 +75,13 @@ const Header = () => {
             <div className="relative">
             { user &&(<motion.img 
               whileTap={{scale:0.6}} 
-              src={user?.photoURL ?? Logo} className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-x1 cursor-pointer rounded-full"
+              src={user?.photoURL ?? userLogo} className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-x1 cursor-pointer rounded-full"
               alt="userprofile" onClick={login}/>
             )} { !user&&(
               <Link to={"/login"}> 
             <motion.img 
               whileTap={{scale:0.6}} 
-              src={user?.photoURL ?? Logo} className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-x1 cursor-pointer rounded-full"
+              src={user?.photoURL ?? userLogo} className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-x1 cursor-pointer rounded-full"
               alt="userprofile"/>
               </Link>
             )}
@@ -164,7 +165,7 @@ const Header = () => {
           <div className="relative">
               <motion.img 
               whileTap={{scale:0.6}} 
-              src={user ? user.photoURL : Logo} className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-x1 cursor-pointer rounded-full"
+              src={user ? user.photoURL : userLogo} className="w-10 min-w-[40px] h-10 min-h-[40px] drop-shadow-x1 cursor-pointer rounded-full"
               alt="userprofile" onClick={login}/>
               
               {
