@@ -5,6 +5,8 @@ import {getAuth,
 } from "firebase/auth";
 
 import { app } from '../firebase.config';
+import google from './img/google.png'
+
 import { roles } from '../utils/data';
 import { useStateValue} from '../context/StateProvider';
 import { actionType } from '../context/reducer';
@@ -158,26 +160,24 @@ const Login = () => {
               ))}
             </select>
           </div>
-        
-    
-    <div className='flex items-center w-full'>
+    <div className='flex  items-center py-2 w-full'>
     <input
         type="submit"
-        value={isRegistering ? "Registrar" : "Iniciar sesión"}  className=' ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold'
+        value={isRegistering ? "Registrar" : "Iniciar sesión"}  className=' ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-8 py-2 rounded-lg text-lg text-white font-semibold'
       />
     </div>
       
     </form>
-    <div className='flex items-center w-full'>
-        <button type='button' className=' ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold' onClick={() => setisRegistering(!isRegistering)}>
+    <div className='flex items-center py-2 w-full'>
+        <button type='button' className=' ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-8 py-2 rounded-lg text-lg text-white font-semibold' onClick={() => setisRegistering(!isRegistering)}>
             {isRegistering ? "Ya tengo una cuenta" : "Quiero registrarme"}
         </button>
     </div>
-    <div className='flex items-center w-full'>
-        <button type='button' className=' ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-12 py-2 rounded-lg text-lg text-white font-semibold' onClick={() => googleLogin()}>Google
+    <div className='flex items-center py-2 w-full'>
+        <button type='button' className='ml-0 md:ml-auto w-full flex flex-row items-center justify-center gap-4 md:w-auto border-none outline-none bg-emerald-500 px-8 py-2 rounded-lg text-lg text-white font-semibold' onClick={() => googleLogin()}><img src={google} className="w-7 object-cover" alt="logo"/>Google
         </button>
     </div>
-  </div>
+    </div>
   )
 }
 
