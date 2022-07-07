@@ -149,8 +149,8 @@ const Login = () => {
         Contraseña:
         <input type="password" id="password" class="block w-full px-4 py-2 mt-2 text-green-700 bg-white border rounded-md focus:border-green-400 focus:ring-green-300 focus:outline-none focus:ring focus:ring-opacity-40" />
       </label>
-
-      <div className='w-full'>
+      {user && user.rol === "admin" && (
+        <div className='w-full'>
             <select  id="rol" onChange={(e)=>setCategory(e.target.value)} className="outline-none w-full text-base border-b-2 border-gray-200 p-2 rounded-md cursor-pointer">
               <option value="other" className="bg-white"> Selecione el rol</option>
               {roles && roles.map((item)=> (<option key={item.id} className="text-base border-0 outline-none capitalize bg-white text-headingColor"
@@ -160,6 +160,8 @@ const Login = () => {
               ))}
             </select>
           </div>
+      )}
+      
     <div className='flex  items-center py-2 w-full'>
     <input
         type="submit"
