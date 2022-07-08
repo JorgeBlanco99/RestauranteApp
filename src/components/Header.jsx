@@ -115,7 +115,17 @@ const Header = () => {
 
                       <Link to={"/gestion"}> 
                       <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 
-                      transition-all duration-75 ease-out text-textColor' onClick={()=>setIsMenu(false)}>Gestion<MdAdd/></p>
+                      transition-all duration-75 ease-out text-textColor' onClick={()=>setIsMenu(false)}>Gestion Informacion<MdAdd/></p>
+                      </Link>
+                    )
+
+                  }
+                  {
+                    user && user.rol === "admin" && ( 
+
+                      <Link to={"/login"}> 
+                      <p className='px-4 py-2 flex items-center gap-3 cursor-pointer hover:bg-slate-200 
+                      transition-all duration-75 ease-out text-textColor' onClick={()=>setIsMenu(false)}>Crear Usuario<MdAdd/></p>
                       </Link>
                     )
 

@@ -24,7 +24,7 @@ const Login = () => {
     const [category,setCategory] = useState(null);
     const auth = getAuth(app);
     const firestore = getFirestore(app);
-    const [isRegistering, setisRegistering] = useState(false);
+    const [isRegistering, setisRegistering] = useState(true);
     const[{user}, dispatch] = useStateValue();
     const provider = new GoogleAuthProvider();
 
@@ -170,17 +170,20 @@ const Login = () => {
         value={isRegistering ? "Registrar" : "Iniciar sesión"}  className=' ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-8 py-2 rounded-lg text-lg text-white font-semibold'
       />
     </div>
-      
     </form>
-    <div className='flex items-center py-2 w-full'>
+    {!user && (<div className='flex items-center py-2 w-full'>
         <button type='button' className=' ml-0 md:ml-auto w-full md:w-auto border-none outline-none bg-emerald-500 px-8 py-2 rounded-lg text-lg text-white font-semibold' onClick={() => setisRegistering(!isRegistering)}>
             {isRegistering ? "Ya tengo una cuenta" : "Quiero registrarme"}
         </button>
     </div>
+    
+    )}
+    {!user && (
     <div className='flex items-center py-2 w-full'>
         <button type='button' className='ml-0 md:ml-auto w-full flex flex-row items-center justify-center gap-4 md:w-auto border-none outline-none bg-emerald-500 px-8 py-2 rounded-lg text-lg text-white font-semibold' onClick={() => googleLogin()}><img src={google} className="w-7 object-cover" alt="logo"/>Google
         </button>
     </div>
+    )}    
     </div>
   )
 }

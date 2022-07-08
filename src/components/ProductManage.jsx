@@ -15,7 +15,7 @@ const ProductManage = () => {
           <div className='w-full flex flex-col items-center justify-center'>
               <p className='text-2xl font-semibold capitalize text-headingColor relative before:absolute before:rounded-lg before:content 
               before:w-80 before:h-2 before:-bottom-2 before:left-4 before:bg-gradient-to-tr from-blue-500 to-blue-300 transition-all
-               ease-in-out duration-100'> Modificacion de productos</p>
+               ease-in-out duration-100'> Modificación de productos</p>
 
             <div className='w-full flex items-center justify-start lg:justify-center gap-8 py-6 overflow-x-scroll scrollbar-none'>
                 {categories && categories.map(category =>(
