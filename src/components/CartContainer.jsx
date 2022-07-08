@@ -81,7 +81,7 @@ const CartContainer = () => {
         <div className='w-full flex items-center justify-between p-4'>
             <motion.div whileTap={{scale:0.75}}> <MdOutlineKeyboardBackspace className='text-3xl cursor-pointer'  onClick={showCart}/> </motion.div>
             <p className='text-lg font-semibold'>Cesta</p>
-            <motion.p whileTap={{scale:0.75}} className='flex items-center gap-2 p-1 px-2 my-2 bg-red-300 rounded-md hover:shadow-md cursor-pointer' onClick={clearCart}> Vaciar <RiRefreshLine/></motion.p>
+            {!pending&&( <motion.p whileTap={{scale:0.75}} className='flex items-center gap-2 p-1 px-2 my-2 bg-red-300 rounded-md hover:shadow-md cursor-pointer' onClick={clearCart}> Vaciar <RiRefreshLine/></motion.p>)}
             <motion.p whileTap={{scale:0.75}} className='flex items-center gap-2 p-1 px-2 my-2 bg-blue-300 rounded-md hover:shadow-md cursor-pointer' onClick={()=> {
               seterPendingOrders();
               setPending(!pending);
@@ -134,7 +134,7 @@ const CartContainer = () => {
             {/* cuentas*/}  
             <div className='w-full flex-1 bg-cartTotal rounded-t-[2rem] flex flex-col items-centerjustify-evenly py-2 px-8'>
                 <motion.button whileTap={{scale:0.75}}
-                type="button" className='w-full p-2 rounded-full bg-blue-600 text-white text-lg my-2 hover shadow-lg' onClick={()=> setPending(false)}>
+                type="button" className='w-full p-2 rounded-full bg-emerald-500 text-white text-lg my-2 hover shadow-lg' onClick={()=> setPending(false)}>
                     Volver
                 </motion.button>
             </div>          
